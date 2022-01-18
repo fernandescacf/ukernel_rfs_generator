@@ -1,0 +1,106 @@
+APPS /home/cacf/neok/neok_apps
+Board ve
+
+Header
+{
+    version 1.0
+    arch armv7
+    mach FVP_VE
+}
+
+Script
+{
+    exec serial { 10 _IO }
+    exec proc { 10 _IO }
+    exec cmd { 10 _IO }
+}
+
+Ram
+{
+    address 0x80000000
+    size 0x2000000
+}
+
+Interrupts
+{
+    private 32
+    shared  160
+}
+
+Devices
+{
+    {
+        name SYSCTRL
+        address 0x1C020000
+        size 65536
+    }
+    {
+        name Timer0
+        address 0x1C110000
+        size 65536
+    }
+    {
+        name Timer1
+        address 0x1C120000
+        size 65536
+    }
+    {
+        name Uart0
+        address 0x1C090000
+        size 4096
+    }
+    {
+        name GICv1
+        address  0x2c000000
+        size 8192
+    }
+}
+
+Files
+{
+    {
+        type elf
+        name serial
+        source ${APPS}/serial/out/${Board}/serial.elf
+    }
+    {
+        type elf
+        name proc
+        source  ${APPS}/proc/proc.elf
+    }
+    {
+        type elf
+        name cmd
+        source  ${APPS}/cmd/cmd.elf
+    }
+    {
+        type elf
+        name echo
+        source  ${APPS}/echo/echo.elf
+    }
+    {
+        type elf
+        name ls
+        source  ${APPS}/ls/ls.elf
+    }
+    {
+        type elf
+        name sload
+        source  ${APPS}/sloader/sloader.elf
+    }
+    {
+        type elf
+        name cat
+        source  ${APPS}/cat/cat.elf
+    }
+    {
+        type elf
+        name timer
+        source  ${APPS}/timer/out/${Board}/blink.elf
+    }
+    {
+        type elf
+        name file
+        source  ${APPS}/file/file.elf
+    }
+}

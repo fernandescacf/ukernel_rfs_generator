@@ -1,0 +1,129 @@
+APPS /home/cacf/neok/neok_apps
+Version 1.0
+Arch armv7
+Board sunxi
+Mach sunxi-h3
+
+Header
+{
+    version ${Version}
+    arch ${Arch}
+    mach ${Mach}
+}
+
+Script
+{
+    exec serial { 10 _IO }
+    exec proc { 10 _IO }
+    exec cmd { 10 _IO }
+}
+
+Ram
+{
+    address 0x40000000
+    size 0x2000000
+}
+
+Interrupts
+{
+    private 32
+    shared  160
+}
+
+Devices
+{
+    {
+        name GPIO
+        address 0x01C20800
+        size 1024
+    }
+    {
+        name Timer
+        address 0x01C20C00
+        size 1024
+    }
+    {
+        name Uart0
+        address 0x01C28000
+        size 1024
+    }
+    {
+        name Uart1
+        address 0x01C28400
+        size 1024
+    }
+    {
+        name Uart2
+        address 0x01C28800
+        size 1024
+    }
+    {
+        name Uart3
+        address 0x01C28C00
+        size 1024
+    }
+    {
+        name GIC-400
+        address 0x01C81000
+        size 8192
+    }
+    {
+        name RGPIO
+        address 0x01F02C00
+        size 1024
+    }
+}
+
+Files
+{
+    {
+        type elf
+        name serial
+        source ${APPS}/serial/out/${Board}/serial.elf
+    }
+    {
+        type elf
+        name proc
+        source ${APPS}/proc/proc.elf
+    }
+    {
+        type elf
+        name cmd
+        source  ${APPS}/cmd/cmd.elf
+    }
+    {
+        type elf
+        name echo
+        source  ${APPS}/echo/echo.elf
+    }
+    {
+        type elf
+        name ls
+        source  ${APPS}/ls/ls.elf
+    }
+    {
+        type elf
+        name sload
+        source  ${APPS}/sloader/sloader.elf
+    }
+    {
+        type elf
+        name cat
+        source  ${APPS}/cat/cat.elf
+    }
+    {
+        type elf
+        name timer
+        source  ${APPS}/timer/out/${Board}/blink.elf
+    }
+    {
+        type elf
+        name file
+        source  ${APPS}/file/file.elf
+    }
+    {
+        type elf
+        name gpio
+        source ${APPS}/gpio/out/${Board}/gpio.elf
+    }
+}
